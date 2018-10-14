@@ -13,3 +13,4 @@
 
 4. We can filter any columns,
   For Eg, Here we filter Central region only.
+![image](https://user-images.githubusercontent.com/8769673/46916241-71db9600-cfd5-11e8-8671-f9c90a943d27.png)
