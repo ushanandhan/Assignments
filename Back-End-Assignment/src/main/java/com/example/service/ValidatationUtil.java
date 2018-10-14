@@ -31,8 +31,6 @@ public class ValidatationUtil {
 			System.out.println("******** It is Xml file ******************");
 			
 			Records records = JAXB.unmarshal(file, Records.class);
-			ObjectMapper mapper = new ObjectMapper();
-			mapper.writeValue(System.out, records);
 			Set<Record> uniqueRecords = uniqueRecords(records.getRecords());
 			checkEndBalance(uniqueRecords);
 			
@@ -44,11 +42,7 @@ public class ValidatationUtil {
 	        String[] nextRecord; 
 	        int i = 0;
 	        while ((nextRecord = csvReader.readNext()) != null) { 
-	        	/*if(i==0) {
-	        		for (String cell : nextRecord) { 
-	                    System.out.print(cell + "\t"); 
-	                } 
-	        	}*/
+//	        	To Skip First line we used below if condition
 	        	if(i>0) {
 	        		Record record = new Record();
 		        	record.setReference(Integer.parseInt(nextRecord[0]));
@@ -93,9 +87,8 @@ public class ValidatationUtil {
 		MathContext mc = new MathContext(5);
 		for (Record record : uniqueRecords) {
 			BigDecimal start = record.getStartBalance().add(record.getMutation(),mc);
-			System.out.println(start+":"+record.getEndBalance());
 			if(!start.equals(record.getEndBalance())) {
-				System.out.println(record.getReference()+" record validation failed");
+				System.out.println("Reference Id : "+record.getReference()+" End Balance validation failed");
 			}
 		}	
 
